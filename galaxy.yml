@@ -1,22 +1,19 @@
 # See https://docs.ansible.com/ansible/latest/dev_guide/collections_galaxy_meta.html
 
-namespace: community
-name: FIXME
+namespace: tremble
+name: signalfx
 version: 0.1.0
 readme: README.md
 authors:
-  - YOUR NAME (github.com/YOURGITHUB)
-description: null
+  - Mark Chappell (github.com/tremble)
+description:  Ansible collection for managing Splunk SignalFX
 license_file: LICENSE
 tags:
-# tags so people can search for collections https://galaxy.ansible.com/search
-# tags are all lower-case, no spaces, no dashes.
-  - example1
-  - example2
-repository: https://github.com/ansible-collections/community.REPO_NAME
-#documentation: https://github.com/ansible-collection-migration/community.REPO_NAME/tree/main/docs
-homepage: https://github.com/ansible-collections/community.REPO_NAME
-issues: https://github.com/ansible-collections/community.REPO_NAME/issues
+  - splunk
+  - signalfx
+repository: https://github.com/tremble/tremble-signalfx
+homepage: https://github.com/tremble/tremble-signalfx
+issues: https://github.com/tremble/tremble-signalfx/issues
 build_ignore:
 # https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#ignoring-files-and-folders
   - .gitignore

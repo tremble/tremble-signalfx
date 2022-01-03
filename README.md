@@ -1,11 +1,9 @@
-# collection_template
-You can build a new repository for an Ansible Collection using this template by following [Creating a repository from a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template). This README.md contains recommended headings for your collection README.md, with comments describing what each section should contain. Once you have created your collection repository, delete this paragraph and the title above it from your README.md.
-
-# Foo Collection for Ansible
+# Splunk SignalFX Collection for Ansible
 <!-- Add CI and code coverage badges here. Samples included below. -->
-[![CI](https://github.com/ansible-collections/REPONAMEHERE/workflows/CI/badge.svg?event=push)](https://github.com/ansible-collections/REPONAMEHERE/actions) [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/REPONAMEHERE)](https://codecov.io/gh/ansible-collections/REPONAMEHERE)
+[![CI](https://github.com/tremble/tremble-signalfx/workflows/CI/badge.svg?event=push)](https://github.com/tremble/tremble-signalfx/actions)
+<!--  [![Codecov](https://img.shields.io/codecov/c/github/ansible-collections/REPONAMEHERE)](https://codecov.io/gh/ansible-collections/REPONAMEHERE) -->
 
-<!-- Describe the collection and why a user would want to use it. What does the collection do? -->
+A set of modules to manage SignalFX metadata.
 
 ## Code of Conduct
 
@@ -13,7 +11,7 @@ We follow the [Ansible Code of Conduct](https://docs.ansible.com/ansible/devel/c
 
 If you encounter abusive behavior, please refer to the [policy violations](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html#policy-violations) section of the Code for information on how to raise a complaint.
 
-## Communication
+<!-- ## Communication
 
 <!--List available communication channels. In addition to channels specific to your collection, we also recommend to use the following ones.-->
 
@@ -24,10 +22,8 @@ Join us in the `#ansible` (general use questions and support), `#ansible-communi
 We take part in the global quarterly [Ansible Contributor Summit](https://github.com/ansible/community/wiki/Contributor-Summit) virtually or in-person. Track [The Bullhorn newsletter](https://eepurl.com/gZmiEP) and join us.
 
 For more information about communication, refer to the [Ansible Communication guide](https://docs.ansible.com/ansible/devel/community/communication.html).
-
+-->
 ## Contributing to this collection
-
-<!--Describe how the community can contribute to your collection. At a minimum, fill up and include the CONTRIBUTING.md file containing how and where users can create issues to report problems or request features for this collection. List contribution requirements, including preferred workflows and necessary testing, so you can benefit from community PRs. If you are following general Ansible contributor guidelines, you can link to - [Ansible Community Guide](https://docs.ansible.com/ansible/devel/community/index.html). List the current maintainers (contributors with write or higher access to the repository). The following can be included:-->
 
 The content of this collection is made by people like you, a community of individuals collaborating on making the world better through developing automation software.
 
@@ -59,18 +55,19 @@ The process of decision making in this collection is based on discussing and fin
 
 Every voice is important. If you have something on your mind, create an issue or dedicated discussion and let's discuss it!
 
-## Tested with Ansible
+<!-- ## Tested with Ansible
 
 <!-- List the versions of Ansible the collection has been tested with. Must match what is in galaxy.yml. -->
-
+-->
 ## External requirements
 
-<!-- List any external resources the collection depends on, for example minimum versions of an OS, libraries, or utilities. Do not list other Ansible collections here. -->
+This collection depends on the SignalFX Python client library: https://github.com/signalfx/signalfx-python
 
-### Supported connections
-<!-- Optional. If your collection supports only specific connection types (such as HTTPAPI, netconf, or others), list them here. -->
+```
+pip install signalfx
+```
 
-## Included content
+<!-- ## Included content
 
 <!-- Galaxy will eventually list the module docs within the UI, but until that is ready, you may need to either describe your plugins etc here, or point to an external docsite to cover that information. -->
 
@@ -112,6 +109,7 @@ See the [changelog](https://github.com/ansible-collections/REPONAMEHERE/tree/mai
 ## Roadmap
 
 <!-- Optional. Include the roadmap for this collection, and the proposed release/versioning strategy so users can anticipate the upgrade/update cycle. -->
+-->
 
 ## More information
 
