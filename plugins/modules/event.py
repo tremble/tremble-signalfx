@@ -68,7 +68,7 @@ class SignalFxEvent(SignalFxIngestManager):
     def __init__(self, module):
         super().__init__(module)
 
-    @SignalFxIngestManager.api_error_handler(description="update dimension", ignore_404=False)
+    @SignalFxIngestManager.api_error_handler(description="send event", ignore_404=False)
     def _send_event(self, **kwargs):
         if self.check_mode:
             return kwargs
