@@ -11,18 +11,6 @@ We follow the [Ansible Code of Conduct](https://docs.ansible.com/ansible/devel/c
 
 If you encounter abusive behavior, please refer to the [policy violations](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html#policy-violations) section of the Code for information on how to raise a complaint.
 
-<!-- ## Communication
-
-<!--List available communication channels. In addition to channels specific to your collection, we also recommend to use the following ones.-->
-
-We announce releases and important changes through Ansible's [The Bullhorn newsletter](https://github.com/ansible/community/wiki/News#the-bullhorn). Be sure you are [subscribed](https://eepurl.com/gZmiEP).
-
-Join us in the `#ansible` (general use questions and support), `#ansible-community` (community and collection development questions), and other [IRC channels](https://docs.ansible.com/ansible/devel/community/communication.html#irc-channels).
-
-We take part in the global quarterly [Ansible Contributor Summit](https://github.com/ansible/community/wiki/Contributor-Summit) virtually or in-person. Track [The Bullhorn newsletter](https://eepurl.com/gZmiEP) and join us.
-
-For more information about communication, refer to the [Ansible Communication guide](https://docs.ansible.com/ansible/devel/community/communication.html).
--->
 ## Contributing to this collection
 
 The content of this collection is made by people like you, a community of individuals collaborating on making the world better through developing automation software.
@@ -57,7 +45,8 @@ Every voice is important. If you have something on your mind, create an issue or
 
 <!-- ## Tested with Ansible
 
-<!-- List the versions of Ansible the collection has been tested with. Must match what is in galaxy.yml. -->
+Ansible 2.12
+
 -->
 ## External requirements
 
@@ -69,11 +58,9 @@ pip install signalfx
 
 <!-- ## Included content
 
-<!-- Galaxy will eventually list the module docs within the UI, but until that is ready, you may need to either describe your plugins etc here, or point to an external docsite to cover that information. -->
 
 ## Using this collection
 
-<!--Include some quick examples that cover the most common use cases for your collection content. It can include the following examples of installation and upgrade (change NAMESPACE.COLLECTION_NAME correspondingly):-->
 
 ### Installing the Collection from Ansible Galaxy
 
@@ -108,7 +95,6 @@ See the [changelog](https://github.com/ansible-collections/REPONAMEHERE/tree/mai
 
 ## Roadmap
 
-<!-- Optional. Include the roadmap for this collection, and the proposed release/versioning strategy so users can anticipate the upgrade/update cycle. -->
 -->
 
 ## More information
