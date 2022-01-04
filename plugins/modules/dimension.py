@@ -96,6 +96,7 @@ class SignalFxDimension(SignalFxRestManager):
             value=self.module.params.get('value'),
             **kwargs
         )
+        return camel_dict_to_snake_dict(dimension, ignore_list=['custom_properties'])
 
     def set_description(self, description):
         if description is None:
