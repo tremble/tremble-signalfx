@@ -121,6 +121,15 @@ class SignalFxRestManager(SignalFxBaseManager):
         self.client = self._sfx.rest(token)
 
 
+class SignalFxIngestManager(SignalFxBaseManager):
+
+    def __init__(self, module):
+        super().__init__(module)
+
+        token = module.params.get('auth_token')
+        self.client = self._sfx.ingest(token)
+
+
 class AnsibleSignalFxModule(AnsibleModule):
 
     def __init__(self, *args, **kwargs):
