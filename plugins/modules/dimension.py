@@ -52,16 +52,9 @@ options:
     - Whether to remove existing properties that aren't passed in the I(properties) parameter.
     default: false
     type: bool
-  auth_token:
-    description:
-    - The SignalFX authentication token.
-    type: str
-    required: true
-  realm:
-    description:
-    - The SignalFX realm to use.
-    default: 'us0'
-    type: str
+
+extends_documentation_fragment:
+- tremble.signalfx.signalfx
 '''
 
 EXAMPLES = '''
@@ -70,99 +63,39 @@ EXAMPLES = '''
 RETURN = '''
 '''
 
-try:
-    import signalfx
-    HAS_SIGNALFX = True
-except ImportError:
-    HAS_SIGNALFX = False
-
-try:
-    import requests
-    HAS_REQUESTS = True
-except ImportError:
-    HAS_REQUESTS = False
-
-
 from copy import deepcopy
 
-from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.common.dict_transformations import camel_dict_to_snake_dict
 
+from ..module_utils.core import AnsibleSignalFxModule
+from ..module_utils.core import SignalFxRestManager
 
-class SignalFxDimension():
 
-    # XXX Will probably be refactored
-    @staticmethod
-    def _merge_set(current, new, purge):
-        _current = set(current)
-        _new = set(new)
-        if purge:
-            final = _new
-        else:
-            final = _new | _current
-
-        return final
-
-    @staticmethod
-    def _merge_dict(current, new, purge):
-        _current = deepcopy(current)
-        if purge:
-            final = dict()
-        else:
-            final = _current
-        final.update(new)
-
-        return final
+class SignalFxDimension(SignalFxRestManager):
 
     def __init__(self, module):
-        realm = module.params.get('realm')
-        token = module.params.get('auth_token')
+        super().__init__(module)
 
-        self.module = module
-        self.check_mode = module.check_mode
-        self.changed = False
         self._update_params = dict()
 
-        sfx = signalfx.SignalFx(
-            api_endpoint='https://api.{REALM}.signalfx.com'.format(REALM=realm),
-            ingest_endpoint='https://ingest.{REALM}.signalfx.com'.format(REALM=realm),
-            stream_endpoint='https://stream.{REALM}.signalfx.com'.format(REALM=realm),
-        )
-
-        self.client = sfx.rest(token)
-        self.dimension = self._get_dimension()
+        self.dimension = self._get_dimension() or dict()
         self.original_dimension = deepcopy(self.dimension)
 
+    @SignalFxRestManager.api_error_handler(description="get dimension")
     def _get_dimension(self):
-        try:
-            dimension = self.client.get_dimension(
-                key=self.module.params.get('key'),
-                value=self.module.params.get('value'),
-            )
-        except requests.exceptions.HTTPError as e:
-            if e.response.status_code == 404:
-                return dict()
-            self.module.fail_json(
-                msg='Failed to get dimension: {0}'.format(e),
-                status_code=e.response.status_code,
-            )
+        dimension = self.client.get_dimension(
+            key=self.module.params.get('key'),
+            value=self.module.params.get('value'),
+        )
         return camel_dict_to_snake_dict(dimension, ignore_list=['custom_properties'])
 
+    @SignalFxRestManager.api_error_handler(description="update dimension", ignore_404=False)
     def _update_dimension(self, **kwargs):
-        try:
-            dimension = self.client.update_dimension(
-                key=self.module.params.get('key'),
-                value=self.module.params.get('value'),
-                **kwargs
-            )
-        except requests.exceptions.HTTPError as e:
-            if e.response.status_code == 404:
-                return dict()
-            self.module.fail_json(
-                msg='Failed to update dimension: {0}'.format(e),
-                status_code=e.response.status_code,
-            )
-        return camel_dict_to_snake_dict(dimension, ignore_list=['custom_properties'])
+        dimension = self.client.update_dimension(
+            key=self.module.params.get('key'),
+            value=self.module.params.get('value'),
+            **kwargs
+        )
 
     def set_description(self, description):
         if description is None:
@@ -221,19 +154,12 @@ def main():
         tags=dict(type='list', elements='str'),
         purge_properties=dict(type='bool', default=False),
         purge_tags=dict(type='bool', default=False),
-        auth_token=dict(type='str', required=True, no_log=True),
-        realm=dict(type='str', default='us0'),
     )
 
-    module = AnsibleModule(
+    module = AnsibleSignalFxModule(
         argument_spec=argument_spec,
         supports_check_mode=True,
     )
-
-    if not HAS_SIGNALFX:
-        module.fail_json(msg='Failed to import required Python module "signalfx"')
-    if not HAS_REQUESTS:
-        module.fail_json(msg='Failed to import required Python module "requests"')
 
     sfx_dimension = SignalFxDimension(module)
     sfx_dimension.set_description(
