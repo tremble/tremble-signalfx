@@ -79,6 +79,7 @@ jobs:
           asset_path: tremble-signalfx-${{ steps.cversion.outputs.version }}.tar.gz
           asset_name: tremble-signalfx-${{ steps.cversion.outputs.version }}.tar.gz
           asset_content_type: application/tar+gzip
-#
-#      - name: Deploy Ansible collection to Galaxy
-#        run: ansible-galaxy collection publish tremble-signalfx-${{ steps.cversion.outputs.version }}.tar.gz --api-key ${{ secrets.GALAXY_API_KEY }}
+
+      - name: Deploy Ansible collection to Galaxy
+        # run: ansible-galaxy collection publish tremble-signalfx-${{ steps.cversion.outputs.version }}.tar.gz --api-key ${{ secrets.GALAXY_API_KEY }}
+        run: ansible-galaxy collection publish tremble-signalfx-${{ steps.cversion.outputs.version }}.tar.gz --api-key ${{ secrets.GALAXYDEV_API_KEY }} --server https://galaxy-dev.ansible.com/api/
