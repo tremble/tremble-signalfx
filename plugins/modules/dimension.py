@@ -58,9 +58,87 @@ extends_documentation_fragment:
 '''
 
 EXAMPLES = '''
+# Set the 'project_name' custom property on the 'project_id:{{ project_id }}' dimension.
+- dimension:
+    key: project_id
+    value: '{{ project_id }}'
+    properties:
+      project_name: '{{ project_name }}'
+    realm: us1
+    auth_token: 'abc123456789def'
+
+# Remove all custom properties from the 'project_id:{{ project_id }}' dimension.
+- dimension:
+    key: project_id
+    value: '{{ project_id }}'
+    properties: {}
+    purge_properties: True
+    realm: us1
+    auth_token: 'abc123456789def'
+
+# Add a tag to the 'project_id:{{ project_id }}' dimension.
+- dimension:
+    key: project_id
+    value: '{{ project_id }}'
+    tags:
+    - MyExampleTag
+    realm: us1
+    auth_token: 'abc123456789def'
 '''
 
 RETURN = '''
+dimension:
+  description:
+    - A dictionary describing the dimension.
+  returned: On success
+  type: dict
+  contains:
+    key:
+      description: Dimension name.
+      returned: On success
+      type: str
+      sample: "some_dimension"
+    value:
+      description: Dimension value.
+      returned: On success
+      type: str
+      sample: "MyValue"
+    created:
+      description: The time that the dimension was created (Unix time).
+      returned: On success
+      type: int
+      sample: 1612972485414
+    creator:
+      description: The ID of the user that created the dimension.
+      returned: On success
+      type: str
+      sample: "ABCDEF12345"
+    description:
+      description: Dimension description (up to 1024 UTF8 characters).
+      returned: On success
+      type: str
+      sample: "My Dimension"
+    last_updated:
+      description: The time that the dimension was last updated (Unix time).
+      returned: On success
+      type: int
+      sample: 1641302231514
+    last_updated_by:
+      description: The ID of the user that last updated the dimension.
+      returned: On success
+      type: str
+      sample: "ABCDEF12345"
+    tags:
+      description: A list of the tags for the dimension.
+      returned: On success
+      type: list
+      elements: str
+      sample: ["tag1", "tag2"]
+    custom_properties:
+      description: A dictionary representing the custom properties for the dimension.
+      returned: On success
+      type: dict
+      sample: {"project_name": "My Project Name"}
 '''
 
 from copy import deepcopy

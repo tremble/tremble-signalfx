@@ -54,9 +54,54 @@ extends_documentation_fragment:
 '''
 
 EXAMPLES = '''
+# Send a simple "ExampleTestEvent" event with no metadata
+- event:
+    event_type: ExampleTestEvent
+    realm: us1
+    auth_token: "ABCDE12345"
+
+# Send an event with dimenstions attached
+- event:
+    event_type: ExampleTestEvent
+    dimensions:
+      application_code: SMPL-001
+      hostname: "{{ ansible_fqdn }}"
+    realm: us1
+    auth_token: "ABCDE12345"
 '''
 
 RETURN = '''
+event:
+  description:
+    - A dictionary describing the event sent.
+  returned: On success
+  type: dict
+  contains:
+    dimensions:
+      description: A dictionary representing the dimensions for the event.
+      returned: When dimensions were set.
+      type: dict
+      sample: {"project_id": "123456789"}
+    custom_properties:
+      description: A dictionary representing the custom properties for the event.
+      returned: When custom properties were set.
+      type: dict
+      sample: {"project_name": "My Project Name"}
+    category:
+      description: A category that describes the event.
+      returned: On success
+      type: str
+      sample: "USER_DEFINED"
+    event_type:
+      description: A name for the event.
+      returned: On success
+      type: str
+      sample: "ExampleTestEvent"
+    timestamp:
+      description: The time at which the event happened (UNIX time).
+      returned: When a timestamp was explicitly sent.
+      type: int
+      sample: 1641304973451
 '''
 
 from ..module_utils.core import AnsibleSignalFxModule
@@ -72,7 +117,8 @@ class SignalFxEvent(SignalFxIngestManager):
     def _send_event(self, **kwargs):
         if self.check_mode:
             return kwargs
-        # send_event doesn't seem to return anything
+        # The API returns no data.  See also:
+        # https://dev.splunk.com/observability/reference/api/ingest_data/latest#endpoint-send-events
         self.client.send_event(**kwargs)
         return kwargs
 
