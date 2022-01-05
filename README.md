@@ -5,6 +5,18 @@
 
 A set of modules to manage SignalFX metadata.
 
+## Included content
+
+<!--start collection content-->
+### Modules
+Name | Description
+--- | ---
+[tremble.signalfx.dimension](https://github.com/tremble/tremble-signalfx/blob/main/docs/tremble.signalfx.dimension_module.rst)|manages SignalFX dimension metadata
+[tremble.signalfx.event](https://github.com/tremble/tremble-signalfx/blob/main/docs/tremble.signalfx.event_module.rst)|sends SignalFX events
+[tremble.signalfx.session](https://github.com/tremble/tremble-signalfx/blob/main/docs/tremble.signalfx.session_module.rst)|log into the SignalFX API
+
+<!--end collection content-->
+
 ## Code of Conduct
 
 We follow the [Ansible Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html) in all our interactions within this project.
@@ -43,11 +55,16 @@ The process of decision making in this collection is based on discussing and fin
 
 Every voice is important. If you have something on your mind, create an issue or dedicated discussion and let's discuss it!
 
-<!-- ## Tested with Ansible
+<!--start requires_ansible-->
+## Ansible version compatibility
 
-Ansible 2.12
+This collection has been tested against following Ansible versions: **>=2.9.10**.
 
--->
+Plugins and modules within a collection may be tested with only specific Ansible versions.
+A collection may contain metadata that identifies these versions.
+PEP440 is the schema used to describe the versions of Ansible.
+<!--end requires_ansible-->
+
 ## External requirements
 
 This collection depends on the SignalFX Python client library: https://github.com/signalfx/signalfx-python
@@ -116,3 +133,4 @@ See the [changelog](https://github.com/ansible-collections/REPONAMEHERE/tree/mai
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) to see the full text.
+
